@@ -957,6 +957,9 @@ video {
 .w-screen {
   width: 100vw;
 }
+.w-\[200px\] {
+  width: 200px;
+}
 .min-w-0 {
   min-width: 0px;
 }
@@ -1074,6 +1077,9 @@ video {
 .items-center {
   align-items: center;
 }
+.justify-start {
+  justify-content: flex-start;
+}
 .justify-center {
   justify-content: center;
 }
@@ -1141,6 +1147,11 @@ video {
 }
 .overflow-x-hidden {
   overflow-x: hidden;
+}
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .whitespace-nowrap {
   white-space: nowrap;

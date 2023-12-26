@@ -12,20 +12,21 @@ export default function Home() {
   const setUser = useUserStore((state) => state.setUser);
 
   const token = localStorage.getItem('token');
+
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (token) {
       setUser();
     }
 
-    if (!token) {
+    if (!isAuthenticated) {
       router.push('/login');
     }
-  }, [isAuthenticated, token]);
+  }, [token, setUser, isAuthenticated, router]);
 
   return (
     <div>
       <Navbar />
-      <h1 className="text-black">Home</h1>
+      <h1 className="">Home</h1>
     </div>
   );
 }

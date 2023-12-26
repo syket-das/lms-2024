@@ -21,8 +21,8 @@ export const useUserStore = create<UserStore>((set) => ({
       });
 
       await set({
-        user: data || null,
-        isAuthenticated: data?.id ? true : false,
+        user: data.data || null,
+        isAuthenticated: data?.data?.id ? true : false,
       });
     } catch (error) {
       await set({
