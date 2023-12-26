@@ -1,5 +1,8 @@
 'use client';
 
+import BooksComponent from '@/components/BooksComponent';
+import CarouselComponent from '@/components/CarouselComponent';
+import FilterComponent from '@/components/FilterComponent';
 import Navbar from '@/components/Navbar';
 import { useUserStore } from '@/store/userStore';
 import { useRouter } from 'next/navigation';
@@ -26,7 +29,19 @@ export default function Home() {
   return (
     <div>
       <Navbar />
-      <h1 className="">Home</h1>
+      <div className="mb-28">
+        <CarouselComponent />
+      </div>
+      <div className="container mx-auto my-8">
+        <h1 className="text-2xl font-bold my-4 text-center">Welcome To LMS</h1>
+        <p className="text-center text-lg">
+          Explore the world of books and learn new things everyday.
+        </p>
+      </div>
+      <FilterComponent />
+      <BooksComponent />
+
+      <div className="mb-20"></div>
     </div>
   );
 }

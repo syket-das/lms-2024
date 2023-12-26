@@ -41,12 +41,14 @@ export function UserAccountNav() {
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href="/dashboard">Dashboard</Link>
+          <Link href="/profile">Profile</Link>
         </DropdownMenuItem>
+        {user.role === 'ADMIN' && (
+          <DropdownMenuItem asChild>
+            <Link href="/admin">Admin Dashboard</Link>
+          </DropdownMenuItem>
+        )}
 
-        <DropdownMenuItem asChild>
-          <Link href="/dashboard/settings">Settings</Link>
-        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="cursor-pointer"

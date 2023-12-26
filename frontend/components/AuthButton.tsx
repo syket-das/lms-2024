@@ -8,8 +8,6 @@ const AuthButton = () => {
   const isAuthenticated = useUserStore((state) => state.isAuthenticated);
   const setUser = useUserStore((state) => state.setUser);
 
-  console.log(isAuthenticated);
-
   return (
     <>
       {!isAuthenticated ? (

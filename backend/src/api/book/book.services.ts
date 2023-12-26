@@ -1,9 +1,60 @@
 import db from '../../utils/db';
 
-export const getBooks = async () => {
+type Book = {
+  name?: string | null;
+  category?: string | null;
+};
+
+export const getBooks = async ({ name, category }: Book) => {
+  if (name && category) {
+    return await db.book.findMany({
+      where: {
+        name: {
+          contains: name,
+        },
+        Category: {
+          name: {
+            contains: category,
+          },
+        },
+      },
+      include: {
+        Category: true,
+        BookTransaction: true,
+      },
+    });
+  } else if (name) {
+    return await db.book.findMany({
+      where: {
+        name: {
+          contains: name,
+        },
+      },
+      include: {
+        Category: true,
+        BookTransaction: true,
+      },
+    });
+  } else if (category) {
+    return await db.book.findMany({
+      where: {
+        Category: {
+          name: {
+            contains: category,
+          },
+        },
+      },
+      include: {
+        Category: true,
+        BookTransaction: true,
+      },
+    });
+  }
+
   return await db.book.findMany({
-    orderBy: {
-      id: 'desc',
+    include: {
+      Category: true,
+      BookTransaction: true,
     },
   });
 };

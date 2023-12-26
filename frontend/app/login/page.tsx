@@ -17,7 +17,6 @@ const Page = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [loading, setLoading] = React.useState(false);
-
   const isAuthenticated = useUserStore((state) => state.isAuthenticated);
   const setUser = useUserStore((state) => state.setUser);
 
@@ -43,7 +42,7 @@ const Page = () => {
         router.push('/');
       }
     } catch (error: any) {
-      toast.error(error.response.data.message || error.message);
+      toast.error(error?.response?.data?.message || error.message);
     } finally {
       setLoading(false);
     }

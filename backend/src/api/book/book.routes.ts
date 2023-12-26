@@ -163,8 +163,17 @@ router.delete(
 );
 
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
+  let category = req.query.category as string | null;
+
+  if (category === 'all') {
+    category = null;
+  }
+
   try {
-    const books = await getBooks();
+    const books = await getBooks({
+      category: category || null,
+      name: (req.query.name as string) || null,
+    });
 
     return res.json({
       success: true,
