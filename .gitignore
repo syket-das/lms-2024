@@ -13,6 +13,9 @@ node_modules/
 frontend/node_modules
 .next
 
+frontend/.next/
+
+
 
 # Environment variables
 .env
