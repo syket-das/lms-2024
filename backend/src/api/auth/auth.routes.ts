@@ -5,60 +5,88 @@ import generateToken from '../../utils/generateToken';
 
 const router = express.Router();
 
-router.post('/login', async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+router.post(
+  '/login',
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { email, password } = req.body;
 
-  const userExist = await findUserByEmail(email);
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: 'Please fill all fields',
+      });
+    }
 
-  if (!userExist) {
-    return res.status(401).json({
-      success: false,
-      message: 'Invalid credentials ',
-    });
+    try {
+      const userExist = await findUserByEmail(email);
+
+      if (!userExist) {
+        return res.status(401).json({
+          success: false,
+          message: 'Invalid credentials ',
+        });
+      }
+
+      const passwordMatch = await bcrypt.compare(password, userExist.password);
+
+      if (!passwordMatch) {
+        return res.status(401).json({
+          success: false,
+          message: 'Invalid credentials ',
+        });
+      }
+
+      return res.json({
+        success: true,
+        token: generateToken(userExist.id),
+      });
+    } catch (error) {
+      next(error);
+    }
   }
+);
 
-  const passwordMatch = await bcrypt.compare(password, userExist.password);
+router.post(
+  '/register',
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { name, email, username, phone, password } = req.body;
 
-  if (!passwordMatch) {
-    return res.status(401).json({
-      success: false,
-      message: 'Invalid credentials ',
-    });
+    if (!name || !email || !username || !phone || !password) {
+      return res.status(400).json({
+        success: false,
+        message: 'Please fill all fields',
+      });
+    }
+
+    try {
+      const userExist = await findUserByEmail(email);
+
+      if (userExist) {
+        return res.status(401).json({
+          success: false,
+          message: 'User already exist',
+        });
+      }
+
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+
+      const createdUser = await createUser({
+        email,
+        name,
+        username,
+        phone,
+        password: hashedPassword,
+      });
+
+      return res.json({
+        success: true,
+        token: generateToken(createdUser.id),
+      });
+    } catch (error) {
+      next(error);
+    }
   }
-
-  return res.json({
-    success: true,
-    token: generateToken(userExist.id),
-  });
-});
-
-router.post('/register', async (req: Request, res: Response) => {
-  const { name, email, username, phone, password } = req.body;
-
-  const userExist = await findUserByEmail(email);
-
-  if (userExist) {
-    return res.status(401).json({
-      success: false,
-      message: 'User already exist',
-    });
-  }
-
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
-
-  const createdUser = await createUser({
-    email,
-    name,
-    username,
-    phone,
-    password: hashedPassword,
-  });
-
-  return res.json({
-    success: true,
-    token: generateToken(createdUser.id),
-  });
-});
+);
 
 export default router;

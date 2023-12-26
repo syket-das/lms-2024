@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import ThemeProvider from '@/components/providers/ThemeProvider';
-import Logo from '@/components/Logo';
-import ThemeSwitcher from '@/components/ThemeSwitcher';
+
+import toast, { Toaster } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,15 +26,17 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
         >
-          <div className="">
-            <nav className="flex items-center justify-between border-b border-border h-[60px] px-4 py-2">
-              <Logo />
-              <div className="flex gap-4 items-center">
-                <ThemeSwitcher />
-              </div>
-            </nav>
-          </div>
-          <div className="mx-4 ">{children}</div>
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              style: {
+                background: '#333',
+                color: '#fff',
+              },
+            }}
+          />
+
+          <div className="">{children}</div>
         </ThemeProvider>
       </body>
     </html>
