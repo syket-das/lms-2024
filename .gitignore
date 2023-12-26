@@ -3,3 +3,26 @@ node_modules
 .env
 .next
 package-lock.json
+
+# Node.js
+node_modules/
+
+# Next.js
+.next/
+
+# Environment variables
+.env
+
+# Visual Studio Code
+.vscode/
+
+# Logs
+*.log
+
+# Build files
+out/
+build/
+
+# Other temporary files
+.DS_Store
+Thumbs.db
