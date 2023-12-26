@@ -5,6 +5,10 @@ export const getBookTransactions = async () => {
     orderBy: {
       id: 'desc',
     },
+    include: {
+      book: true,
+      user: true,
+    },
   });
 };
 

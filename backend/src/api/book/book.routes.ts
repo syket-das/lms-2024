@@ -175,9 +175,24 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
       name: (req.query.name as string) || null,
     });
 
+    let availableCopiesForBooks: any = [];
+
+    books.forEach((book) => {
+      const activeTransactions = book.BookTransaction.filter(
+        (transaction) => transaction.status === 'ACTIVE'
+      );
+
+      const availableCopies = book.bookCount - activeTransactions.length;
+
+      availableCopiesForBooks.push({
+        ...book,
+        availableCopies,
+      });
+    });
+
     return res.json({
       success: true,
-      data: books,
+      data: availableCopiesForBooks,
     });
   } catch (error) {
     next(error);
