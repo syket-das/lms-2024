@@ -8,7 +8,11 @@ package-lock.json
 node_modules/
 
 # Next.js
-.next/
+.next
+
+frontend/node_modules
+.next
+
 
 # Environment variables
 .env

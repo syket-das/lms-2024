@@ -12,23 +12,19 @@ export const metadata: Metadata = {
 const sidebarNavItems = [
   {
     title: 'General',
-    href: '/examples/forms',
+    href: '/dashboard/general',
   },
   {
     title: 'Category',
     href: '/dashboard/category',
   },
   {
-    title: 'Appearance',
-    href: '/examples/forms/appearance',
+    title: 'Book Transaction',
+    href: '/dashboard/bookTransaction',
   },
   {
-    title: 'Notifications',
-    href: '/examples/forms/notifications',
-  },
-  {
-    title: 'Display',
-    href: '/examples/forms/display',
+    title: 'Users',
+    href: '/dashboard/user',
   },
 ];
 
@@ -53,7 +49,7 @@ export default function SettingsLayout({ children }: SettingsLayoutProps) {
           <aside className="-mx-4 lg:w-1/5">
             <SidebarNav items={sidebarNavItems} />
           </aside>
-          <div className="flex-1 lg:max-w-2xl">{children}</div>
+          <div className="flex-1 ">{children}</div>
         </div>
       </div>
     </>

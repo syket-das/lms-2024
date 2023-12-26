@@ -12,9 +12,17 @@ import {
 import { Avatar, AvatarFallback } from './ui/avatar';
 import { Icons } from './Icons';
 import { useUserStore } from '@/store/userStore';
+import { useEffect } from 'react';
 
 export function UserAccountNav() {
   const { setUser, user } = useUserStore((state) => state);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setUser();
+    }
+  }, []);
 
   return (
     <DropdownMenu>
@@ -43,7 +51,7 @@ export function UserAccountNav() {
         </DropdownMenuItem>
         {user.role === 'ADMIN' && (
           <DropdownMenuItem asChild>
-            <Link href="/dashboard">Admin Dashboard</Link>
+            <Link href="/dashboard/general">Admin Dashboard</Link>
           </DropdownMenuItem>
         )}
 

@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { Button } from './ui/button';
 import Link from 'next/link';
@@ -6,6 +7,15 @@ import { UserAccountNav } from './UserAccount';
 
 const AuthButton = () => {
   const isAuthenticated = useUserStore((state) => state.isAuthenticated);
+  const user = useUserStore((state) => state.user);
+  const setUser = useUserStore((state) => state.setUser);
+
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setUser();
+    }
+  }, []);
 
   return (
     <>
