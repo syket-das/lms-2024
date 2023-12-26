@@ -24,7 +24,7 @@ const BooksComponent = () => {
                   width: '100%',
                   display: 'block',
                   borderRadius: '10px',
-                  height: index % 2 === 0 ? '350px' : '450px',
+                  height: index % 2 === 0 ? '350px' : '500px',
                 }}
               />
               <div className="flex justify-between">

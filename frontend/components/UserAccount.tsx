@@ -14,9 +14,7 @@ import { Icons } from './Icons';
 import { useUserStore } from '@/store/userStore';
 
 export function UserAccountNav() {
-  const setUser = useUserStore((state) => state.setUser);
-  const user = useUserStore((state) => state.user);
-  const removeUser = useUserStore((state) => state.removeUser);
+  const { setUser, user } = useUserStore((state) => state);
 
   return (
     <DropdownMenu>
@@ -45,7 +43,7 @@ export function UserAccountNav() {
         </DropdownMenuItem>
         {user.role === 'ADMIN' && (
           <DropdownMenuItem asChild>
-            <Link href="/admin">Admin Dashboard</Link>
+            <Link href="/dashboard">Admin Dashboard</Link>
           </DropdownMenuItem>
         )}
 
@@ -55,7 +53,7 @@ export function UserAccountNav() {
           onSelect={(event) => {
             event.preventDefault();
             localStorage.removeItem('token');
-            removeUser();
+            setUser();
           }}
         >
           Sign out

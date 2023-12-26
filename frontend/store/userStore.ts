@@ -13,24 +13,32 @@ export const useUserStore = create<UserStore>((set) => ({
   user: null,
   isAuthenticated: false,
   setUser: async () => {
-    try {
-      const { data } = await axios.get(`${url}/api/v1/user/profile`, {
+    await axios
+      .get(`${url}/api/v1/user/profile`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
+      })
+      .then((res) => {
+        set({
+          user: res.data.data,
+          isAuthenticated: true,
+        });
+      })
+      .catch((err) => {
+        set({
+          user: null,
+          isAuthenticated: false,
+        });
       });
-
-      await set({
-        user: data.data || null,
-        isAuthenticated: data?.data?.id ? true : false,
-      });
-    } catch (error) {
-      await set({
-        user: null,
-        isAuthenticated: false,
-      });
-    }
   },
 
-  removeUser: () => set({}, true),
+  removeUser: () =>
+    set(
+      {
+        user: null,
+        isAuthenticated: false,
+      },
+      true
+    ),
 }));

@@ -24,7 +24,7 @@ export default function Home() {
     if (!isAuthenticated) {
       router.push('/login');
     }
-  }, [token, setUser, isAuthenticated, router]);
+  }, [token, isAuthenticated, router]);
 
   return (
     <div>
