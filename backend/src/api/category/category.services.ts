@@ -5,6 +5,9 @@ export const getCategories = async () => {
     orderBy: {
       id: 'desc',
     },
+    include: {
+      books: true,
+    },
   });
 };
 

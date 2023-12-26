@@ -1,3 +1,4 @@
+'use client';
 import { CategoryCard } from '@/components/CategoryCard';
 import { Button } from '@/components/ui/button';
 import {
@@ -11,9 +12,34 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import React from 'react';
+import { useCategoryStore } from '@/store/useCategoryStore';
+import React, { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
-const page = () => {
+const Page = () => {
+  const { categories, setCategories, createCategory } = useCategoryStore(
+    (state) => state
+  );
+
+  const [name, setName] = React.useState('');
+
+  const handleSubmit = async (e: any) => {
+    if (!name) {
+      toast.error('Please enter a name');
+      return;
+    }
+
+    e.preventDefault();
+    await createCategory({ name });
+    setName('');
+    setCategories();
+    toast.success('Category created successfully');
+  };
+
+  useEffect(() => {
+    setCategories();
+  }, []);
+
   return (
     <div>
       <div className="flex justify-end">
@@ -37,23 +63,27 @@ const page = () => {
                   id="name"
                   placeholder="Enter category name"
                   className="col-span-3"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
             </div>
             <DialogFooter>
-              <Button type="submit">Save changes</Button>
+              <Button onClick={handleSubmit} type="submit">
+                Save changes
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
       </div>
 
       <div className="my-4 flex flex-wrap justify-start items-center gap-4">
-        {[1, 2, 3, 4, 5, 6].map((item, i) => (
-          <CategoryCard key={i} />
+        {categories.map((item: any) => (
+          <CategoryCard key={item.id} category={item} />
         ))}
       </div>
     </div>
   );
 };
 
-export default page;
+export default Page;

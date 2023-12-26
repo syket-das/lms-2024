@@ -1,9 +1,8 @@
 {
-  "/not-found": "app/not-found.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
   "/page": "app/page.js",
+  "/login/page": "app/login/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
   "/dashboard/category/page": "app/dashboard/category/page.js",
-  "/dashboard/bookTransaction/page": "app/dashboard/bookTransaction/page.js",
   "/dashboard/user/page": "app/dashboard/user/page.js",
   "/dashboard/general/page": "app/dashboard/general/page.js"
 }

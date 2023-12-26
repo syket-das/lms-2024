@@ -7,6 +7,7 @@ interface CategoryStore {
   categories: any;
   setCategories: () => void;
   removeCategories: () => void;
+  createCategory: (data: any) => void;
 }
 
 export const useCategoryStore = create<CategoryStore>((set) => ({
@@ -26,4 +27,21 @@ export const useCategoryStore = create<CategoryStore>((set) => ({
   },
 
   removeCategories: () => set({}, true),
+
+  createCategory: async (data) => {
+    try {
+      const { data: d } = await axios.post(
+        `${url}/api/v1/category/create`,
+        data,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  },
 }));
