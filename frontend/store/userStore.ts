@@ -4,13 +4,16 @@ const url = 'http://localhost:8000';
 
 interface UserStore {
   user: any;
+  users: any;
   isAuthenticated: boolean;
   setUser: () => void;
   removeUser: () => void;
+  allUsers: () => void;
 }
 
 export const useUserStore = create<UserStore>((set) => ({
   user: null,
+  users: [],
   isAuthenticated: false,
   setUser: async () => {
     await axios
@@ -41,4 +44,22 @@ export const useUserStore = create<UserStore>((set) => ({
       },
       true
     ),
+
+  allUsers: async () => {
+    try {
+      const { data } = await axios.get(`${url}/api/v1/user`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      await set({
+        users: data.data || [],
+      });
+    } catch (error) {
+      await set({
+        users: [],
+      });
+    }
+  },
 }));

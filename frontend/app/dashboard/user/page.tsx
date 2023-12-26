@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   DataGrid,
   GridToolbar,
@@ -19,25 +19,15 @@ import {
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { useUserStore } from '@/store/userStore';
 
-function QuickSearchToolbar() {
-  return (
-    <Box
-      sx={{
-        p: 0.5,
-        pb: 0,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      }}
-    >
-      <GridToolbar />
-      <GridToolbarQuickFilter />
-    </Box>
-  );
-}
+const Page = () => {
+  const { allUsers, users } = useUserStore((state) => state);
 
-const page = () => {
+  useEffect(() => {
+    allUsers();
+  }, []);
+
   return (
     <ClientOnly>
       <div>
@@ -72,14 +62,18 @@ const page = () => {
           </Dialog>
         </div>
         <DataGrid
-          rows={[
-            { id: 1, col1: 'Hello', col2: 'World' },
-            { id: 2, col1: 'XGrid', col2: 'is Awesome' },
-            { id: 3, col1: 'Material-UI', col2: 'is Amazing' },
-          ]}
+          rows={users}
           columns={[
-            { field: 'col1', headerName: 'Column 1', width: 150 },
-            { field: 'col2', headerName: 'Column 2', width: 150 },
+            { field: 'username', headerName: 'User Name', flex: 1 },
+            { field: 'name', headerName: 'Name', flex: 1 },
+            { field: 'email', headerName: 'Email', flex: 1 },
+            {
+              field: 'phone',
+              headerName: 'Phone Number',
+              flex: 1,
+            },
+
+            { field: 'role', headerName: 'Role', flex: 1 },
           ]}
           slots={{ toolbar: QuickSearchToolbar }}
         />
@@ -88,4 +82,21 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
+
+function QuickSearchToolbar() {
+  return (
+    <Box
+      sx={{
+        p: 0.5,
+        pb: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}
+    >
+      <GridToolbar />
+      <GridToolbarQuickFilter />
+    </Box>
+  );
+}
