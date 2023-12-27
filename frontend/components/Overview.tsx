@@ -2,6 +2,8 @@
 
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import ClientOnly from './ClientOnly';
+import { useCategoryStore } from '@/store/useCategoryStore';
+import { useEffect } from 'react';
 
 const data = [
   {
@@ -55,10 +57,23 @@ const data = [
 ];
 
 export function Overview() {
+  const { categories, setCategories } = useCategoryStore((state) => state);
+
+  useEffect(() => {
+    setCategories();
+  }, []);
+
+  const d = categories?.map((category: any) => {
+    return {
+      name: category.name,
+      total: category.books.length,
+    };
+  });
+
   return (
     <ClientOnly>
       <ResponsiveContainer width="100%" height={350}>
-        <BarChart data={data}>
+        <BarChart data={d}>
           <XAxis
             dataKey="name"
             stroke="#888888"
@@ -71,7 +86,7 @@ export function Overview() {
             fontSize={12}
             tickLine={false}
             axisLine={false}
-            tickFormatter={(value) => `$${value}`}
+            tickFormatter={(value) => `${value}`}
           />
           <Bar
             dataKey="total"

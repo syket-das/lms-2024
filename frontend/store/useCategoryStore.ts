@@ -40,8 +40,6 @@ export const useCategoryStore = create<CategoryStore>((set) => ({
           },
         }
       );
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   },
 }));

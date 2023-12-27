@@ -20,6 +20,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { useUserStore } from '@/store/userStore';
+import toast from 'react-hot-toast';
 
 const Page = () => {
   const { allUsers, users } = useUserStore((state) => state);
@@ -32,34 +33,13 @@ const Page = () => {
     <ClientOnly>
       <div>
         <div className="flex justify-end my-4">
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button>Add User</Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
-              <DialogHeader>
-                <DialogTitle>Add a new category</DialogTitle>
-                <DialogDescription>
-                  Enter the name of the category you want to add.
-                </DialogDescription>
-              </DialogHeader>
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="name" className="text-right">
-                    Name
-                  </Label>
-                  <Input
-                    id="name"
-                    placeholder="Enter category name"
-                    className="col-span-3"
-                  />
-                </div>
-              </div>
-              <DialogFooter>
-                <Button type="submit">Save changes</Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
+          <Button
+            onClick={() => {
+              toast.success('User can be added from register page. ');
+            }}
+          >
+            Add User
+          </Button>
         </div>
         <DataGrid
           rows={users}

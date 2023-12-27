@@ -44,8 +44,6 @@ export const useBookTransactionStore = create<BookTransactionStore>((set) => ({
           },
         }
       );
-
-      console.log(response);
     } catch (error) {
       await set({
         bookTransactions: [],

@@ -1,6 +1,6 @@
 'use client';
 import { Icons } from '@/components/Icons';
-import { buttonVariants } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
@@ -42,7 +42,6 @@ const Page = () => {
         router.push('/');
       }
     } catch (error: any) {
-      console.log(error);
       toast.error(error?.response?.data?.message || error.message);
     } finally {
       setLoading(false);
@@ -77,6 +76,22 @@ const Page = () => {
               Enter your email and password to sign in
             </p>
           </div>
+
+          <div
+            className="my-4 flex gap-2 items-center justify-center cursor-pointer"
+            onClick={() => {
+              setEmail('saiketsd23@gmail.com');
+              setPassword('123456');
+            }}
+          >
+            <p className="text-xs">
+              Click here to auto fill admin credientials
+            </p>
+            <Button size={'sm'} variant={'link'}>
+              Auto fill
+            </Button>
+          </div>
+
           <div className={cn('grid gap-6')}>
             <form onSubmit={handleSubmit}>
               <div className="grid gap-4">
@@ -94,7 +109,7 @@ const Page = () => {
                   />
                 </div>
                 <div className="grid gap-1">
-                  <Label className="sr-only" htmlFor="password">
+                  <Label className="" htmlFor="password">
                     Password
                   </Label>
                   <Input

@@ -62,6 +62,7 @@ export function UserAccountNav() {
             event.preventDefault();
             localStorage.removeItem('token');
             setUser();
+            window.location.href = '/login';
           }}
         >
           Sign out

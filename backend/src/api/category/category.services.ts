@@ -6,7 +6,11 @@ export const getCategories = async () => {
       id: 'desc',
     },
     include: {
-      books: true,
+      books: {
+        include: {
+          BookTransaction: true,
+        },
+      },
     },
   });
 };

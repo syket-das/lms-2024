@@ -47,7 +47,7 @@ const FilterComponent = () => {
           />
         </div>
         <Select onValueChange={(value) => setCategory(value as any)}>
-          <SelectTrigger className="w-[110px]">
+          <SelectTrigger className="w-[110px] md:w-[150px]">
             <SelectValue placeholder="Categories" />
           </SelectTrigger>
           <SelectContent>

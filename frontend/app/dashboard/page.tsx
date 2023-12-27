@@ -1,7 +1,9 @@
-import React from 'react';
+'use client';
+import { useUserStore } from '@/store/userStore';
+import React, { useEffect } from 'react';
 
-const page = () => {
+const Page = () => {
   return <div>page</div>;
 };
 
-export default page;
+export default Page;
