@@ -16,11 +16,11 @@ export const useBookStore = create<BookStore>((set) => ({
       const { data } = await axios.get(`${url}/api/v1/book`);
 
       await set({
-        books: data.data || null,
+        books: data.data || [],
       });
     } catch (error) {
       await set({
-        books: null,
+        books: [],
       });
     }
   },
@@ -33,11 +33,11 @@ export const useBookStore = create<BookStore>((set) => ({
       );
 
       await set({
-        books: data.data || null,
+        books: data.data || [],
       });
     } catch (error) {
       await set({
-        books: null,
+        books: [],
       });
     }
   },

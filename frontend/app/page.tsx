@@ -14,9 +14,9 @@ export default function Home() {
   const isAuthenticated = useUserStore((state) => state.isAuthenticated);
   const setUser = useUserStore((state) => state.setUser);
 
-  const token = localStorage.getItem('token');
-
+  
   useEffect(() => {
+    const token = localStorage.getItem('token');
     if (token) {
       setUser();
     }
@@ -24,7 +24,7 @@ export default function Home() {
     if (!isAuthenticated) {
       router.push('/login');
     }
-  }, [token, isAuthenticated, router]);
+  }, [isAuthenticated, router]);
 
   return (
     <div>
