@@ -31,7 +31,7 @@ const Page = () => {
     }
   }, [isAuthenticated, router]);
 
-  const url = 'http://localhost:8000';
+  const url = 'http://98.70.38.17:8000';
 
   const register = async () => {
     setLoading(true);
