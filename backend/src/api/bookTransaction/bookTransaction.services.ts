@@ -46,3 +46,15 @@ export const deleteBookTransaction = async (id: any) => {
     },
   });
 };
+
+export const getBookTransactionByUserId = async (userId: any) => {
+  return await db.bookTransaction.findMany({
+    where: {
+      userId,
+    },
+    include: {
+      book: true,
+      user: true,
+    },
+  });
+};

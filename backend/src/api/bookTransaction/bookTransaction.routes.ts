@@ -4,6 +4,7 @@ import { findUserById } from '../user/user.services';
 import { Role, TransactionStatus } from '@prisma/client';
 import {
   createBookTransaction,
+  getBookTransactionByUserId,
   getBookTransactions,
   updateBookTransaction,
 } from './bookTransaction.services';
@@ -103,6 +104,25 @@ router.put(
       return res.status(201).json({
         success: true,
         data: updatedBookTransaction,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.get(
+  '/me',
+  middlewares.isAuthenticated,
+  async function (req: any, res: Response, next: NextFunction) {
+    const { id: userIdAuth } = req.payload;
+
+    try {
+      const bookTransactions = await getBookTransactionByUserId(userIdAuth);
+
+      return res.status(200).json({
+        success: true,
+        data: bookTransactions,
       });
     } catch (error) {
       next(error);

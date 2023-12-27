@@ -5,13 +5,16 @@ const url = 'http://localhost:8000';
 
 interface BookTransactionStore {
   bookTransactions: [];
+  myBookTransactions: [];
   setBookTransactions: () => void;
   addBookTransaction: (data: any) => void;
   updateBookTransaction: (id: string, data: any) => void;
+  myTransactions: () => void;
 }
 
 export const useBookTransactionStore = create<BookTransactionStore>((set) => ({
   bookTransactions: [],
+  myBookTransactions: [],
   setBookTransactions: async () => {
     try {
       const { data } = await axios.get(`${url}/api/v1/bookTransaction`, {
@@ -64,6 +67,24 @@ export const useBookTransactionStore = create<BookTransactionStore>((set) => ({
     } catch (error) {
       await set({
         bookTransactions: [],
+      });
+    }
+  },
+
+  myTransactions: async () => {
+    try {
+      const { data } = await axios.get(`${url}/api/v1/bookTransaction/me`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      await set({
+        myBookTransactions: data.data || [],
+      });
+    } catch (error) {
+      await set({
+        myBookTransactions: [],
       });
     }
   },

@@ -862,6 +862,12 @@ video {
 .mb-2 {
   margin-bottom: 0.5rem;
 }
+.mt-20 {
+  margin-top: 5rem;
+}
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
 .block {
   display: block;
 }
@@ -1222,6 +1228,9 @@ video {
 }
 .gap-0 {
   gap: 0px;
+}
+.gap-8 {
+  gap: 2rem;
 }
 .space-x-1 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
