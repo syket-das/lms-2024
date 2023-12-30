@@ -24,12 +24,23 @@ Welcome to the Library Management System (LMS-2024) repository. This project is 
 
 ## Project Setup
 
-To run the project locally, follow these steps:
+### Backend
 
-1. Clone the repository: `git clone https://github.com/syket-das/lms-2024.git`
-2. Navigate to the project directory: `cd lms-2024`
-3. Install dependencies: `npm install`
-4. Run the development server: `npm run dev`
+1. Navigate to the backend folder: `cd backend`
+2. Install dependencies: `npm install`
+3. Set up your MongoDB connection in the appropriate configuration files.
+4. Run the backend server: `npm start`
+
+### Frontend
+
+1. Navigate to the frontend folder: `cd frontend`
+2. Install dependencies: `npm install`
+3. Run the frontend development server: `npm start`
+
+## Admin Login Credentials
+
+- **Email:** saiketsd232@gmail.com
+- **Password:** 123456
 
 ## Documentation
 
