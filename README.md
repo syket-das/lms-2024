@@ -51,14 +51,7 @@ Welcome to the Library Management System (LMS-2024) repository. This project is 
 
 This project is licensed under the [MIT License](LICENSE).
 
-## Acknowledgments
+![Screenshot from 2024-01-02 16-15-56](https://github.com/syket-das/lms-2024/assets/80612737/4816fc51-2266-4848-a7ab-3b083367a7a9)
+![Screenshot from 2024-01-02 16-16-03](https://github.com/syket-das/lms-2024/assets/80612737/2b8f9c2e-8d3a-4106-abcb-282c436078d9)
+![98-70-38-17-3000](https://github.com/syket-das/lms-2024/assets/80612737/c9e59443-00b8-475f-b2d3-63f57a0b337c)
 
-Special thanks to [Your Full Name] for their dedication and contribution to this project.
-
-Feel free to explore the live version [here](http://98.70.38.17:3000).
-
-For any inquiries or issues, please contact [Your Full Name] at [your.email@example.com]. Your feedback is highly appreciated.
-
----
-
-**Note:** Before visiting the live version, please review the website specifications in the [documentation](https://documenter.getpostman.com/view/16799930/2s9YkuXxNd).
